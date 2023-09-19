@@ -20,6 +20,13 @@ public interface CashReceiptRepository extends JpaRepository<CashReceipt, Long> 
     List<CashReceipt> findAll();
 
     @Query("""
+            SELECT COUNT(*) FROM
+            CashReceipt c WHERE
+            c.isDeleted = false
+            """)
+    long count();
+
+    @Query("""
             SELECT c FROM CashReceipt  c
             WHERE c.isPaid = true
             AND c.isDeleted = false
