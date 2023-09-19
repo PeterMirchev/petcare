@@ -1,6 +1,8 @@
-package com.petcare.petcare.model.entity;
+package com.petcare.petcare.pet.model.entity;
 
-import com.petcare.petcare.model.enums.PetType;
+import com.petcare.petcare.cashreceipt.model.CashReceipt;
+import com.petcare.petcare.pet.enums.PetType;
+import com.petcare.petcare.petowner.PetOwner;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -8,7 +10,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "pet")
+@Table(name = "pets")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

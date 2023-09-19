@@ -1,5 +1,6 @@
-package com.petcare.petcare.model.entity;
+package com.petcare.petcare.petowner;
 
+import com.petcare.petcare.pet.model.entity.Pet;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
@@ -8,7 +9,7 @@ import lombok.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "pet_owner")
+@Table(name = "pet_owners")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -1,4 +1,4 @@
-package com.petcare.petcare.model.enums;
+package com.petcare.petcare.pet.enums;
 
 public enum PetType {
 
