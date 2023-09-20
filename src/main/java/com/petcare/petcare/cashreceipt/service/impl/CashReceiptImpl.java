@@ -1,6 +1,6 @@
 package com.petcare.petcare.cashreceipt.service.impl;
 import com.petcare.petcare.cashreceipt.ExceptionMessages;
-import com.petcare.petcare.cashreceipt.NonExistingEntityException;
+import com.petcare.petcare.NonExistingEntityException;
 import com.petcare.petcare.cashreceipt.repository.CashReceiptRepository;
 import com.petcare.petcare.cashreceipt.controller.CashReceiptExpose;
 import com.petcare.petcare.cashreceipt.controller.CashReceiptSeed;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CashReceiptImpl implements CashReceiptService {
@@ -36,9 +37,9 @@ public class CashReceiptImpl implements CashReceiptService {
     }
 
     @Override
-    public CashReceiptExpose findById(Long id){
+    public CashReceiptExpose findById(UUID id){
         CashReceipt cashReceipt = cashReceiptRepository.findById(id)
-                .orElseThrow(() -> new NonExistingEntityException(String.format(ExceptionMessages.CASH_RECEIPT_DOES_NOT_EXIST, id)));
+                .orElseThrow(()-> new NonExistingEntityException(String.format(ExceptionMessages.CASH_RECEIPT_DOES_NOT_EXIST, id)));
         return CashReceiptMapper.toCashReceiptExpose(cashReceipt);
     }
 
@@ -60,14 +61,23 @@ public class CashReceiptImpl implements CashReceiptService {
                 .toList();
     }
 
+    @Override
+    public List<CashReceiptExpose> findAllNotPaid() {
+        return cashReceiptRepository
+                .findAllNotPaid()
+                .stream()
+                .map(CashReceiptMapper::toCashReceiptExpose)
+                .toList();
+    }
+
     @Transactional
-    public void pay(Long id) {
+    public void pay(UUID id) {
         cashReceiptRepository.pay(id);
     }
 
     @Override
     @Transactional
-    public void deleteById(Long id) {
+    public void deleteById(UUID id) {
         cashReceiptRepository.setDeleteStatus(id, true);
     }
 

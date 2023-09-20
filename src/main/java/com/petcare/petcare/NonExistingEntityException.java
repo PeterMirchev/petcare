@@ -1,4 +1,4 @@
-package com.petcare.petcare.cashreceipt;
+package com.petcare.petcare;
 
 public class NonExistingEntityException extends RuntimeException {
 

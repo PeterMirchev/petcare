@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController()
@@ -16,7 +17,7 @@ public class CashReceiptController {
         this.cashReceiptService = cashReceiptService;
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public CashReceiptExpose create(@Valid @RequestBody CashReceiptSeed cashReceiptSeed) {
         return cashReceiptService.create(cashReceiptSeed);
     }
@@ -27,8 +28,8 @@ public class CashReceiptController {
         return cashReceiptService.count();
     }
 
-    @GetMapping("/{id:\\d+}")
-    public CashReceiptExpose findById(@PathVariable("id") Long id) {
+    @GetMapping("/{id}")
+    public CashReceiptExpose findById(@PathVariable("id") UUID id) {
         return cashReceiptService.findById(id);
 
     }
@@ -38,20 +39,26 @@ public class CashReceiptController {
         return cashReceiptService.findAll();
     }
 
-    @GetMapping("/AllPaid")
+    @GetMapping("/all-paid")
     public List<CashReceiptExpose> findAllPaid() {
         return cashReceiptService.findAllPaid();
     }
 
-    @PutMapping("/{id:\\d+}")
-    public CashReceiptExpose pay(@PathVariable("id") Long id) {
+    @GetMapping("/all-not-paid")
+    public List<CashReceiptExpose> findAllNotPaid() {
+        return cashReceiptService.findAllNotPaid();
+    }
+
+    @PutMapping("/{id}")
+    public CashReceiptExpose pay(@PathVariable("id") UUID id) {
         cashReceiptService.pay(id);
         return cashReceiptService.findById(id);
     }
 
-    @DeleteMapping("/{id:\\d+}")
-    public ResponseEntity<String> deleteById(@PathVariable("id") Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable("id") UUID id) {
         cashReceiptService.deleteById(id);
         return ResponseEntity.ok("Successfully Deleted cash receipt.");
     }
+
 }

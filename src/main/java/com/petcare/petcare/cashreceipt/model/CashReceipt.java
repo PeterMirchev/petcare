@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "cash_receipts")
@@ -14,8 +15,8 @@ import java.time.OffsetDateTime;
 @Builder
 public class CashReceipt {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     @NonNull
     private BigDecimal price;
     @Column(name = "doctor_name")
