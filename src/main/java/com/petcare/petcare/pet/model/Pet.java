@@ -1,10 +1,14 @@
 package com.petcare.petcare.pet.model;
 import com.petcare.petcare.cashreceipt.model.CashReceipt;
+import com.petcare.petcare.pet.enums.PetBreed;
 import com.petcare.petcare.pet.enums.PetType;
 import com.petcare.petcare.petowner.model.PetOwner;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,11 +28,13 @@ public class Pet {
     @NonNull
     @Enumerated
     private PetType petType;
-    @NonNull
+    @NotNull
+    private PetBreed petBreed;
     @ManyToOne
+    @NotNull
     private PetOwner petOwner;
-    @OneToMany
-    private List<CashReceipt> cashReceipList;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<CashReceipt> cashReceipList = new ArrayList<>();
 
 
 }

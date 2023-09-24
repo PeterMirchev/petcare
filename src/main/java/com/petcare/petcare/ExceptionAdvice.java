@@ -67,4 +67,15 @@ public class ExceptionAdvice {
                 .build();
     }
 
+    @ExceptionHandler(org.springframework.http.converter.HttpMessageNotReadableException.class)
+    public ResponseEntity<String> handleException(Exception exception) {
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(String.format(
+                        "Error: %s%nDetail Message: %s%n",
+                        exception.getClass().getSimpleName(),
+                        exception.getMessage()));
+    }
+
 }

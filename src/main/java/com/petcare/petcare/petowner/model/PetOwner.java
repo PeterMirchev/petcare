@@ -28,7 +28,7 @@ public class PetOwner {
     @NonNull
     @Column(unique = true)
     private String email;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Pet> pets = new HashSet<>();
 
 }

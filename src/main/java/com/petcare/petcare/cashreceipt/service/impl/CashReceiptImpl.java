@@ -1,5 +1,5 @@
 package com.petcare.petcare.cashreceipt.service.impl;
-import com.petcare.petcare.cashreceipt.ExceptionMessages;
+import com.petcare.petcare.ExceptionMessages;
 import com.petcare.petcare.NonExistingEntityException;
 import com.petcare.petcare.cashreceipt.repository.CashReceiptRepository;
 import com.petcare.petcare.cashreceipt.controller.CashReceiptExpose;
